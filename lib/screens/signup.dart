@@ -1,3 +1,4 @@
+import 'package:edu_sync/controllers/firestore_storage.dart';
 import 'package:edu_sync/widgets/custom_button.dart';
 import 'package:edu_sync/widgets/custom_text_field.dart';
 import 'package:flutter/material.dart';
@@ -10,7 +11,24 @@ class SignUp extends StatefulWidget {
 }
 
 class _SignUpState extends State<SignUp> {
+  final _nameController = TextEditingController();
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
+  final _confirmPasswordController = TextEditingController();
   String? selectedRole = 'Instructor';
+
+  final Auth _authService = Auth();
+
+  Future<void> _handleSignUp() async {
+    await _authService.signUp(
+      name: _nameController.text,
+      email: _emailController.text,
+      password: _passwordController.text,
+      confirmPassword: _confirmPasswordController.text,
+      role: selectedRole!,
+      context: context,
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +58,11 @@ class _SignUpState extends State<SignUp> {
               ],
             ),
             SizedBox(height: 5),
-            CustomTextField(labelText: 'Name', hintText: 'Enter your name'),
+            CustomTextField(
+              controller: _nameController,
+              labelText: 'Name',
+              hintText: 'Enter your name',
+            ),
             SizedBox(height: 10),
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
@@ -52,7 +74,12 @@ class _SignUpState extends State<SignUp> {
               ],
             ),
             SizedBox(height: 5),
-            CustomTextField(labelText: 'Email', hintText: 'xxxx@gmail.com', icon: Icons.email_outlined), 
+            CustomTextField(
+              controller: _emailController,
+              labelText: 'Email',
+              hintText: 'xxxx@gmail.com',
+              icon: Icons.email_outlined,
+            ),
             SizedBox(height: 10),
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
@@ -65,6 +92,7 @@ class _SignUpState extends State<SignUp> {
             ),
             SizedBox(height: 5),
             CustomTextField(
+              controller: _passwordController,
               labelText: 'Password',
               hintText: 'Enter your password',
               obscureText: true,
@@ -82,6 +110,7 @@ class _SignUpState extends State<SignUp> {
             ),
             SizedBox(height: 5),
             CustomTextField(
+              controller: _confirmPasswordController,
               labelText: 'Confirm Password',
               hintText: 'Confirm your password',
               obscureText: true,
@@ -89,63 +118,33 @@ class _SignUpState extends State<SignUp> {
             ),
             SizedBox(height: 10),
             Row(
-              children: [
-                Expanded(
-                  child: ChoiceChip(
-                    label: Text('Instructor'),
-                    selected: selectedRole == 'Instructor',
-                    onSelected: (bool selected) {
-                      setState(() {
-                        selectedRole = 'Instructor';
-                      });
-                    },
-                    selectedColor: Color.fromARGB(255, 5, 126, 128),
-                    backgroundColor: Color.fromARGB(255, 242, 243, 243),
-                  ),
-                ),
-                SizedBox(width: 8),
-                Expanded(
-                  child: ChoiceChip(
-                    label: Text('Student'),
-                    selected: selectedRole == 'Student',
-                    onSelected: (bool selected) {
-                      setState(() {
-                        selectedRole = 'Student';
-                      });
-                    },
-                    selectedColor: Color.fromARGB(255, 5, 126, 128),
-                    backgroundColor: Color.fromARGB(255, 242, 243, 243),
-                  ),
-                ),
-                SizedBox(width: 8),
-                Expanded(
-                  child: ChoiceChip(
-                    label: Text('Parent'),
-                    selected: selectedRole == 'Parent',
-                    onSelected: (bool selected) {
-                      setState(() {
-                        selectedRole = 'Parent';
-                      });
-                    },
-                    selectedColor: Color.fromARGB(255, 5, 126, 128),
-                    backgroundColor: Color.fromARGB(255, 242, 243, 243),
-                  ),
-                ),
-              ],
+              children:
+                  ['Instructor', 'Student', 'Parent']
+                      .map(
+                        (role) => Expanded(
+                          child: ChoiceChip(
+                            label: Text(role),
+                            selected: selectedRole == role,
+                            onSelected: (bool selected) {
+                              setState(() {
+                                selectedRole = role;
+                              });
+                            },
+                            selectedColor: Color.fromARGB(255, 5, 126, 128),
+                            backgroundColor: Color.fromARGB(255, 242, 243, 243),
+                          ),
+                        ),
+                      )
+                      .toList(),
             ),
             SizedBox(height: 10),
-            CustomButton(
-              text: 'Sign Up',
-              onPressed: () {
-                // Add sign-up functionality
-              },
-            ),
+            CustomButton(text: 'Sign Up', onPressed: _handleSignUp),
             TextButton(
               onPressed: () {
                 Navigator.pop(context);
               },
               style: TextButton.styleFrom(
-                splashFactory: NoSplash.splashFactory, 
+                splashFactory: NoSplash.splashFactory,
               ),
               child: Text(
                 'Already have an account? Log in',
