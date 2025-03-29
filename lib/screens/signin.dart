@@ -15,36 +15,36 @@ class Signin extends StatefulWidget {
 class _SigninState extends State<Signin> {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
-  //final _authService = Auth();
+  final _authService = Auth();
 
   String? errorMessage;
 
-  // void _handleSignIn() async {
-  //   String email = _emailController.text.trim();
-  //   String password = _passwordController.text.trim();
+  void _handleSignIn() async {
+    String email = _emailController.text.trim();
+    String password = _passwordController.text.trim();
 
-  //   // Validate input before sending request
-  //   String? emailError = InputValidation.validateEmail(email);
-  //   String? passwordError = InputValidation.validatePassword(password);
+    // Validate input before sending request
+    String? emailError = InputValidation.validateEmail(email);
+    String? passwordError = InputValidation.validatePassword(password);
 
-  //   if (emailError != null || passwordError != null) {
-  //     setState(() {
-  //       errorMessage = emailError ?? passwordError;
-  //     });
-  //     return;
-  //   }
+    if (emailError != null || passwordError != null) {
+      setState(() {
+        errorMessage = emailError ?? passwordError;
+      });
+      return;
+    }
 
-  //   // Authenticate using Firebase
-  //   String? error = await _authService.signIn(email, password);
-  //   if (error != null) {
-  //     setState(() {
-  //       errorMessage = error;
-  //     });
-  //   } else {
-  //     // Navigate to the home screen on successful login
-  //     Navigator.pushReplacementNamed(context, '/profile');
-  //   }
-  // }
+    // Authenticate using Firebase
+    String? error = await _authService.signIn(email, password);
+    if (error != null) {
+      setState(() {
+        errorMessage = error;
+      });
+    } else {
+      // Navigate to the home screen on successful login
+      Navigator.pushReplacementNamed(context, '/profile');
+    }
+  }
 
   String? _validateEmail(String? email) {
     if (email == null || email.isEmpty) {
@@ -151,7 +151,7 @@ class _SigninState extends State<Signin> {
                 if (errorMessage != null)
                   Text(errorMessage!, style: TextStyle(color: Colors.red)),
 
-                //CustomButton(text: 'Log in', onPressed: _handleSignIn),
+                CustomButton(text: 'Log in', onPressed: _handleSignIn),
                 const SizedBox(height: 20),
                 TextButton(
                   onPressed: () {
