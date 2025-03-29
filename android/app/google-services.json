@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1087784613350",
+    "project_id": "edu-sync-08",
+    "storage_bucket": "edu-sync-08.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1087784613350:android:00cfe8c2e204a2241f5227",
+        "android_client_info": {
+          "package_name": "com.example.edu_sync"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCfDl1PDKghCGMjZb3Nls-0bppRJP6zHxY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
