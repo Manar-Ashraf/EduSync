@@ -140,18 +140,18 @@ class _SignUpState extends State<SignUp> {
                 // Add sign-up functionality
               },
             ),
-            // TextButton(
-            //   onPressed: () {
-            //     Navigator.pop(context);
-            //   },
-            //   style: TextButton.styleFrom(
-            //     splashFactory: NoSplash.splashFactory, 
-            //   ),
-            //   child: Text(
-            //     'Already have an account? Log in',
-            //     style: TextStyle(color: const Color.fromARGB(255, 12, 13, 13)),
-            //   ),
-            // ),
+            TextButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              style: TextButton.styleFrom(
+                splashFactory: NoSplash.splashFactory, 
+              ),
+              child: Text(
+                'Already have an account? Log in',
+                style: TextStyle(color: const Color.fromARGB(255, 12, 13, 13)),
+              ),
+            ),
           ],
         ),
       ),

@@ -151,10 +151,10 @@ class _GenderState extends State<Profile> {
                     CustomButton(
                       text: 'Logout',
                       onPressed: () {
-                        // Navigator.push(
-                        //   context,
-                        //   MaterialPageRoute(builder: (context) => Signin()),
-                        // );
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => Signin()),
+                        );
                       },
                     ),
                     SizedBox(height: 10),
