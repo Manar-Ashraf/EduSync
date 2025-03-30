@@ -1,3 +1,4 @@
+import 'package:edu_sync/screens/profile.dart';
 import 'package:edu_sync/screens/profile_student.dart';
 import 'package:edu_sync/screens/signin.dart';
 import 'package:edu_sync/screens/signup.dart';
@@ -19,9 +20,9 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       routes: {
         '/signin': (context) => Signin(),
-        //'/signup': (context) => SignUp(),
+        '/signup': (context) => SignUp(),
         '/profile': (context) => Profile(),
-
+        '/profile2': (context) => Profile2(),
         // '/home': (context) => Home(),
         // '/notes': (context) => Report(),
       },

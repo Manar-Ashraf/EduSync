@@ -1,21 +1,21 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:edu_sync/controllers/navigation2.dart';
+import 'package:edu_sync/widgets/bottom_bar_2.dart';
 import 'package:edu_sync/widgets/gender_dropdown.dart';
 import 'package:edu_sync/widgets/profile-field.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:edu_sync/controllers/navigation.dart';
 import 'package:edu_sync/screens/signin.dart';
 import 'package:edu_sync/widgets/custom_button.dart';
-import 'package:edu_sync/widgets/bottom_bar_1.dart';
 import 'package:flutter/material.dart';
 
-class Profile extends StatefulWidget {
-  const Profile({super.key});
+class Profile2 extends StatefulWidget {
+  const Profile2({super.key});
 
   @override
   _ProfileState createState() => _ProfileState();
 }
 
-class _ProfileState extends State<Profile> {
+class _ProfileState extends State<Profile2> {
   final _auth = FirebaseAuth.instance;
   final _firestore = FirebaseFirestore.instance;
 
@@ -24,11 +24,11 @@ class _ProfileState extends State<Profile> {
   String _email = '';
   String _phone = '';
   String _gender = 'Female';
-  String _level = 'Loading...';
+  String _subject = '';
 
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _phoneController = TextEditingController();
-  int _selectedIndex = 3;
+  int _selectedIndex = 1;
 
   @override
   void initState() {
@@ -44,14 +44,11 @@ class _ProfileState extends State<Profile> {
 
       if (userDoc.exists) {
         setState(() {
-          _name = userDoc['name'] ?? ''; 
+          _name = userDoc['name'] ?? '';
           _email = userDoc['email'] ?? '';
           _phone = userDoc['phone'] ?? '';
           _gender = userDoc['gender'] ?? 'Female';
-          _level =
-              userDoc['level'] != null
-                  ? "Level ${userDoc['level']}"
-                  : "";
+          _subject = userDoc['subject'] != null ? "${userDoc['subject']}" : "";
 
           _nameController.text = _name;
           _phoneController.text = _phone;
@@ -105,7 +102,7 @@ class _ProfileState extends State<Profile> {
                           CircleAvatar(
                             radius: 50,
                             backgroundImage: AssetImage(
-                              'assets/images/Profile.png',
+                              'assets/images/Profile2.png',
                             ),
                           ),
                           Positioned(
@@ -145,7 +142,7 @@ class _ProfileState extends State<Profile> {
                             ),
                           ),
                           Text(
-                            _level,
+                            _subject,
                             style: TextStyle(fontSize: 14, color: Colors.grey),
                           ),
                         ],
@@ -200,13 +197,13 @@ class _ProfileState extends State<Profile> {
                 ),
               ),
             ),
-            BottomBar1(
+            BottomBar2(
               currentIndex: _selectedIndex,
               onTap: (index) {
                 setState(() {
                   _selectedIndex = index;
                 });
-                Navigation1.onItemTapped(context, index);
+                Navigation2.onItemTapped(context, index);
               },
             ),
           ],
@@ -215,3 +212,6 @@ class _ProfileState extends State<Profile> {
     );
   }
 }
+
+
+

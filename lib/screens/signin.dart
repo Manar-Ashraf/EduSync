@@ -35,16 +35,40 @@ class _SigninState extends State<Signin> {
     }
 
     // Authenticate using Firebase
-    String? error = await _authService.signIn(email, password);
-    if (error != null) {
-      setState(() {
-        errorMessage = error;
-      });
+    String? role = await _authService.signIn(email, password);
+    if (role != null && role.isNotEmpty) {
+      if (role == 'User data not found!') {
+        setState(() {
+          errorMessage = role;
+        });
+        return;
+      }
+
+      // Navigate based on role
+      switch (role.toLowerCase()) {
+        case 'student':
+          Navigator.pushReplacementNamed(context, '/profile');
+          break;
+        case 'instructor':
+          Navigator.pushReplacementNamed(context, '/profile2');
+          break;
+        case 'parent':
+          Navigator.pushReplacementNamed(context, '/profile2');
+          break;
+        default:
+          setState(() {
+            errorMessage = 'Unknown role: $role';
+          });
+      }
     } else {
-      // Navigate to the home screen on successful login
-      Navigator.pushReplacementNamed(context, '/profile');
+      setState(() {
+        errorMessage = 'Error signing in. Please try again.';
+      });
     }
   }
+  // Navigator.pushReplacementNamed(context, '/profile2').then((_) {
+  //   setState(() {});
+  // });
 
   String? _validateEmail(String? email) {
     if (email == null || email.isEmpty) {

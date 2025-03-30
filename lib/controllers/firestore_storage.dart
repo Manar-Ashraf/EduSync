@@ -34,17 +34,21 @@ class Auth {
       User? user = userCredential.user;
       if (user != null) {
         await _firestore.collection('users').doc(user.uid).set({
-          'name': name,
-          'email': email,
-          'role': role,
-          'createdAt': FieldValue.serverTimestamp(),
+         'name': name,  
+        'email': email,
+        'role': role,
+        'phone': '', 
+        'gender': 'Female', 
+        'level': null, 
+        'subject': null,
+        'createdAt': FieldValue.serverTimestamp(),
         });
 
-        showSnackBar(context, ' Account created successfully!', Colors.green);
-        Navigator.pushReplacementNamed(context, '/profile');
+        showSnackBar(context, 'Account created successfully!', Colors.green);
+        Navigator.pop(context, '/signin');
       }
     } catch (e) {
-      showSnackBar(context, '🔥 Error: ${e.toString()}', Colors.red);
+      showSnackBar(context, 'Error: ${e.toString()}', Colors.red);
     }
   }
 
@@ -58,3 +62,5 @@ class Auth {
     );
   }
 }
+
+
