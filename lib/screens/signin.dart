@@ -47,7 +47,7 @@ class _SigninState extends State<Signin> {
       // Navigate based on role
       switch (role.toLowerCase()) {
         case 'student':
-          Navigator.pushReplacementNamed(context, '/profile');
+          Navigator.pushReplacementNamed(context, '/home_student');
           break;
         case 'instructor':
           Navigator.pushReplacementNamed(context, '/profile2');

@@ -50,7 +50,7 @@ class _ProfileState extends State<Profile> {
           _gender = userDoc['gender'] ?? 'Female';
           _level =
               userDoc['level'] != null
-                  ? "Level ${userDoc['level']}"
+                  ? "Grade ${userDoc['level']}"
                   : "";
 
           _nameController.text = _name;

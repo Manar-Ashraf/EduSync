@@ -1,3 +1,4 @@
+import 'package:edu_sync/screens/home_student.dart';
 import 'package:edu_sync/screens/profile.dart';
 import 'package:edu_sync/screens/profile_student.dart';
 import 'package:edu_sync/screens/signin.dart';
@@ -23,8 +24,7 @@ class MyApp extends StatelessWidget {
         '/signup': (context) => SignUp(),
         '/profile': (context) => Profile(),
         '/profile2': (context) => Profile2(),
-        // '/home': (context) => Home(),
-        // '/notes': (context) => Report(),
+        '/home_student': (context) => HomeStudent(),
       },
       debugShowCheckedModeBanner: false,
       initialRoute: '/signin',
