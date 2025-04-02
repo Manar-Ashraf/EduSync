@@ -1,4 +1,5 @@
 import 'package:edu_sync/controllers/navigation.dart';
+import 'package:edu_sync/screens/course_details.dart';
 import 'package:edu_sync/widgets/bottom_bar_1.dart';
 import 'package:edu_sync/widgets/search.dart';
 import 'package:flutter/material.dart';
@@ -94,12 +95,12 @@ class _CoursesState extends State<Courses> {
                 var subject = filteredSubjects[index];
                 return GestureDetector(
                   onTap: () {
-                    // Navigator.push(
-                    //   context,
-                    //   MaterialPageRoute(
-                    //     builder: (context) => CourseDetailsScreen(subjectName: subject['name']),
-                    //   ),
-                    // );
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => CourseDetails(subjectName: subject['course'], image: subject['image'], progress: subject['progress']),
+                      ),
+                    );
                   },
                   child: Container(
                     margin: const EdgeInsets.only(bottom: 16),
