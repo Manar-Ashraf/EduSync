@@ -1,4 +1,6 @@
 import 'package:edu_sync/controllers/navigation.dart';
+import 'package:edu_sync/screens/attendance_student.dart';
+import 'package:edu_sync/screens/grades_student.dart';
 import 'package:edu_sync/widgets/bottom_bar_1.dart';
 import 'package:flutter/material.dart';
 
@@ -43,7 +45,7 @@ class _CourseDetailsState extends State<CourseDetails> {
                     widget.image,
                     height: 100,
                     width: 100,
-                    fit: BoxFit.cover,
+                    fit: BoxFit.fill,
                   ),
                   Expanded(
                     child: Text(
@@ -56,7 +58,7 @@ class _CourseDetailsState extends State<CourseDetails> {
                       textAlign: TextAlign.right,
                     ),
                   ),
-                  const SizedBox(width: 48), // Balance the back button space
+                  const SizedBox(width: 48),
                 ],
               ),
             ),
@@ -106,7 +108,7 @@ class _CourseDetailsState extends State<CourseDetails> {
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 _buildInfo('12', 'Chapters'),
-                _buildInfo('3', 'Quizzes'),
+                _buildInfo('2', 'Quizzes'),
               ],
             ),
           ),
@@ -146,13 +148,12 @@ class _CourseDetailsState extends State<CourseDetails> {
                         elevation: 0,
                       ),
                       onPressed: () {
-                        // Navigator.push(
-                        //   context,
-                        //   MaterialPageRoute(
-                        //     builder:
-                        //         (context) => AttendanceStudent(),
-                        //   ),
-                        // );
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => AttendanceStudent(),
+                          ),
+                        );
                       },
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -200,13 +201,15 @@ class _CourseDetailsState extends State<CourseDetails> {
                         elevation: 0,
                       ),
                       onPressed: () {
-                        // Navigator.push(
-                        //   context,
-                        //   MaterialPageRoute(
-                        //     builder:
-                        //         (context) => GradesStudent(),
-                        //   ),
-                        // );
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder:
+                                (context) => GradesStudent(
+                                  subjectName: widget.subjectName,
+                                ),
+                          ),
+                        );
                       },
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,

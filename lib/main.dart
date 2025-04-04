@@ -1,4 +1,5 @@
 import 'package:edu_sync/screens/courses.dart';
+import 'package:edu_sync/screens/grades_student.dart';
 import 'package:edu_sync/screens/home_student.dart';
 import 'package:edu_sync/screens/profile.dart';
 import 'package:edu_sync/screens/profile_student.dart';
@@ -28,7 +29,7 @@ class MyApp extends StatelessWidget {
         '/profile2': (context) => Profile2(),
         '/home_student': (context) => HomeStudent(),
         '/courses': (context) => Courses(),
-        '/report': (context) => ReportStudent(),
+        '/report_student': (context) => ReportStudent(),
 
       },
       debugShowCheckedModeBanner: false,

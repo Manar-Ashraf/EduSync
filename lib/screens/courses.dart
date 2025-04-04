@@ -3,6 +3,7 @@ import 'package:edu_sync/screens/course_details.dart';
 import 'package:edu_sync/widgets/bottom_bar_1.dart';
 import 'package:edu_sync/widgets/search.dart';
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Courses extends StatefulWidget {
   const Courses({super.key});
@@ -13,33 +14,82 @@ class Courses extends StatefulWidget {
 
 class _CoursesState extends State<Courses> {
   int _currentIndex = 1;
-  List<Map<String, dynamic>> subjects = [
-    {'course': 'MATHEMATICS', 'image': 'assets/images/math.png', 'progress': 0.7},
-    {'course': 'SCIENCE', 'image': 'assets/images/science.png', 'progress': 0.6},
-    {'course': 'MUSIC', 'image': 'assets/images/music.png', 'progress': 0.9},
-    {'course': 'ENGLISH', 'image': 'assets/images/english.png', 'progress': 0.7},
-    {'course': 'FRENCH', 'image': 'assets/images/french.png', 'progress': 0.7},
-    {'course': 'ARABIC', 'image': 'assets/images/arabic.png', 'progress': 0.8},
-    {'course': 'COMPUTER','image': 'assets/images/computer.png','progress': 0.9,},
-    {'course': 'ART', 'image': 'assets/images/art.png', 'progress': 0.7},
-    {'course': 'HISTORY', 'image': 'assets/images/history.png', 'progress': 0.8},
-  ];
-
-  List<Map<String, dynamic>> filteredSubjects = [];
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+  bool _isLoading = true;
 
   @override
   void initState() {
     super.initState();
-    filteredSubjects = subjects;
+    _loadSubjects();
+  }
+
+  Future<void> _loadSubjects() async {
+    try {
+      final snapshot = await _firestore.collection('subjects').get();
+      final subjects =
+          snapshot.docs.map((doc) {
+            return {
+              'id': doc.id,
+              'course': doc['name'],
+              'image': _getSubjectImage(doc['name']),
+              'progress': (doc['progress'] ?? 0).toDouble(),
+            };
+          }).toList();
+
+      setState(() {
+        filteredSubjects = subjects;
+        _isLoading = false;
+      });
+    } catch (e) {
+      setState(() {
+        _isLoading = false;
+      });
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text('Error loading subjects: $e')));
+    }
+  }
+
+  List<Map<String, dynamic>> filteredSubjects = [];
+
+  String _getSubjectImage(String subjectName) {
+    switch (subjectName.toUpperCase()) {
+      case 'MATHEMATICS':
+        return 'assets/images/math.png';
+      case 'SCIENCE':
+        return 'assets/images/science.png';
+      case 'MUSIC':
+        return 'assets/images/music.png';
+      case 'ENGLISH':
+        return 'assets/images/english.png';
+      case 'FRENCH':
+        return 'assets/images/french.png';
+      case 'ARABIC':
+        return 'assets/images/arabic.png';
+      case 'COMPUTER':
+        return 'assets/images/computer.png';
+      case 'ART':
+        return 'assets/images/art.png';
+      case 'HISTORY':
+        return 'assets/images/history.png';
+      default:
+        return 'assets/images/default_subject.png';
+    }
   }
 
   void searchSubjects(String query) {
+    if (query.isEmpty) {
+      _loadSubjects();
+      return;
+    }
+
     setState(() {
       filteredSubjects =
-          subjects
+          filteredSubjects
               .where(
-                (subject) =>
-                    subject['course'].contains(query),
+                (subject) => subject['course'].toLowerCase().contains(
+                  query.toLowerCase(),
+                ),
               )
               .toList();
     });
@@ -78,7 +128,10 @@ class _CoursesState extends State<Courses> {
                     onPressed: () {
                       showSearch(
                         context: context,
-                        delegate: CourseSearch(subjects, searchSubjects),
+                        delegate: CourseSearch(
+                          filteredSubjects,
+                          searchSubjects,
+                        ),
                       );
                     },
                   ),
@@ -88,64 +141,74 @@ class _CoursesState extends State<Courses> {
           ),
 
           Expanded(
-            child: ListView.builder(
-              padding: const EdgeInsets.all(16),
-              itemCount: filteredSubjects.length,
-              itemBuilder: (context, index) {
-                var subject = filteredSubjects[index];
-                return GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => CourseDetails(subjectName: subject['course'], image: subject['image'], progress: subject['progress']),
-                      ),
-                    );
-                  },
-                  child: Container(
-                    margin: const EdgeInsets.only(bottom: 16),
-                    padding: const EdgeInsets.all(20),
-                    height: 150,
-                    decoration: BoxDecoration(
-                      color: const Color.fromARGB(255, 185, 215, 215),
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Image.asset(
-                              subject['image'],
-                              height: 80,
-                              width: 90,
-                              fit: BoxFit.fill,
-                            ),
-                            const SizedBox(width: 60),
-
-                            Text(
-                              subject['course'],
-                              style: const TextStyle(
-                                fontSize: 18,
-                                fontWeight: FontWeight.w500,
+            child:
+                _isLoading
+                    ? const Center(child: CircularProgressIndicator())
+                    : filteredSubjects.isEmpty
+                    ? const Center(child: Text('No subjects found'))
+                    : ListView.builder(
+                      padding: const EdgeInsets.all(16),
+                      itemCount: filteredSubjects.length,
+                      itemBuilder: (context, index) {
+                        var subject = filteredSubjects[index];
+                        return GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder:
+                                    (context) => CourseDetails(
+                                      subjectName: subject['course'],
+                                      image: subject['image'],
+                                      progress: subject['progress'],
+                                    ),
                               ),
+                            );
+                          },
+                          child: Container(
+                            margin: const EdgeInsets.only(bottom: 16),
+                            padding: const EdgeInsets.all(20),
+                            height: 150,
+                            decoration: BoxDecoration(
+                              color: const Color.fromARGB(255, 185, 215, 215),
+                              borderRadius: BorderRadius.circular(20),
                             ),
-                          ],
-                        ),
-                        const SizedBox(height: 20),
-                        LinearProgressIndicator(
-                          value: subject['progress'],
-                          backgroundColor: Colors.grey[300],
-                          color: Color.fromARGB(255, 5, 126, 128),
-                          minHeight: 4,
-                        ),
-                      ],
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Row(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    Image.asset(
+                                      subject['image'],
+                                      height: 80,
+                                      width: 90,
+                                      fit: BoxFit.fill,
+                                    ),
+                                    const SizedBox(width: 60),
+
+                                    Text(
+                                      subject['course'],
+                                      style: const TextStyle(
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.w500,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                const SizedBox(height: 20),
+                                LinearProgressIndicator(
+                                  value: subject['progress'],
+                                  backgroundColor: Colors.grey[300],
+                                  color: Color.fromARGB(255, 5, 126, 128),
+                                  minHeight: 4,
+                                ),
+                              ],
+                            ),
+                          ),
+                        );
+                      },
                     ),
-                  ),
-                );
-              },
-            ),
           ),
         ],
       ),

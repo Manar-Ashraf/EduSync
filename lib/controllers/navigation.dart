@@ -13,7 +13,7 @@ class Navigation1 {
         Navigator.pushNamed(context, '/profile');
         break;
       case 3:
-        Navigator.pushNamed(context, '/report');
+        Navigator.pushNamed(context, '/report_student');
         break;
       case 4:
         Navigator.pushNamed(context, '/more');
