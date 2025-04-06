@@ -1,5 +1,5 @@
 import 'package:edu_sync/controllers/navigation.dart';
-import 'package:edu_sync/screens/course_details.dart';
+import 'package:edu_sync/screens/student/course_details.dart';
 import 'package:edu_sync/widgets/bottom_bar_1.dart';
 import 'package:edu_sync/widgets/search.dart';
 import 'package:flutter/material.dart';
@@ -73,7 +73,7 @@ class _CoursesState extends State<Courses> {
       case 'HISTORY':
         return 'assets/images/history.png';
       default:
-        return 'assets/images/default_subject.png';
+        return '';
     }
   }
 
@@ -143,7 +143,7 @@ class _CoursesState extends State<Courses> {
           Expanded(
             child:
                 _isLoading
-                    ? const Center(child: CircularProgressIndicator())
+                    ? const Center(child: CircularProgressIndicator(color: Colors.teal,))
                     : filteredSubjects.isEmpty
                     ? const Center(child: Text('No subjects found'))
                     : ListView.builder(

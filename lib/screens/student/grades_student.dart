@@ -189,7 +189,7 @@ class _GradesStudentState extends State<GradesStudent> {
                   ],
                 ),
                 progressColor: const Color.fromARGB(255, 5, 126, 128),
-                backgroundColor: Color.fromARGB(255, 242, 243, 243)!,
+                backgroundColor: Color.fromARGB(255, 242, 243, 243),
                 circularStrokeCap: CircularStrokeCap.round,
               ),
               const SizedBox(height: 15),

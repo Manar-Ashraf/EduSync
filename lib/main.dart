@@ -1,9 +1,9 @@
-import 'package:edu_sync/screens/courses.dart';
-import 'package:edu_sync/screens/grades_student.dart';
-import 'package:edu_sync/screens/home_student.dart';
+import 'package:edu_sync/screens/instructor/home_instructor.dart';
+import 'package:edu_sync/screens/student/courses.dart';
+import 'package:edu_sync/screens/student/home_student.dart';
 import 'package:edu_sync/screens/profile.dart';
-import 'package:edu_sync/screens/profile_student.dart';
-import 'package:edu_sync/screens/report_student.dart';
+import 'package:edu_sync/screens/student/profile_student.dart';
+import 'package:edu_sync/screens/student/report_student.dart';
 import 'package:edu_sync/screens/signin.dart';
 import 'package:edu_sync/screens/signup.dart';
 import 'package:flutter/material.dart';
@@ -30,6 +30,7 @@ class MyApp extends StatelessWidget {
         '/home_student': (context) => HomeStudent(),
         '/courses': (context) => Courses(),
         '/report_student': (context) => ReportStudent(),
+        '/home_instructor': (context) => HomeInstructor(),
 
       },
       debugShowCheckedModeBanner: false,

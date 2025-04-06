@@ -1,6 +1,6 @@
 import 'package:edu_sync/controllers/navigation.dart';
-import 'package:edu_sync/screens/attendance_student.dart';
-import 'package:edu_sync/screens/grades_student.dart';
+import 'package:edu_sync/screens/student/attendance_student.dart';
+import 'package:edu_sync/screens/student/grades_student.dart';
 import 'package:edu_sync/widgets/bottom_bar_1.dart';
 import 'package:flutter/material.dart';
 

@@ -50,11 +50,11 @@ class _SigninState extends State<Signin> {
           Navigator.pushReplacementNamed(context, '/home_student');
           break;
         case 'instructor':
-          Navigator.pushReplacementNamed(context, '/profile2');
+          Navigator.pushReplacementNamed(context, '/home_instructor');
           break;
-        case 'parent':
-          Navigator.pushReplacementNamed(context, '/profile2');
-          break;
+        // case 'parent':
+        //   Navigator.pushReplacementNamed(context, '/profile2');
+        //   break;
         default:
           setState(() {
             errorMessage = 'Unknown role: $role';
@@ -66,9 +66,7 @@ class _SigninState extends State<Signin> {
       });
     }
   }
-  // Navigator.pushReplacementNamed(context, '/profile2').then((_) {
-  //   setState(() {});
-  // });
+  
 
   String? _validateEmail(String? email) {
     if (email == null || email.isEmpty) {
