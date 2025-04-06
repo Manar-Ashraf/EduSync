@@ -1,7 +1,7 @@
 import 'package:edu_sync/screens/instructor/home_instructor.dart';
+import 'package:edu_sync/screens/parent/home_parent.dart';
 import 'package:edu_sync/screens/student/courses.dart';
 import 'package:edu_sync/screens/student/home_student.dart';
-import 'package:edu_sync/screens/profile.dart';
 import 'package:edu_sync/screens/student/profile_student.dart';
 import 'package:edu_sync/screens/student/report_student.dart';
 import 'package:edu_sync/screens/signin.dart';
@@ -26,11 +26,12 @@ class MyApp extends StatelessWidget {
         '/signin': (context) => Signin(),
         '/signup': (context) => SignUp(),
         '/profile': (context) => Profile(),
-        '/profile2': (context) => Profile2(),
+        //'/profile2': (context) => Profile2(),
         '/home_student': (context) => HomeStudent(),
         '/courses': (context) => Courses(),
         '/report_student': (context) => ReportStudent(),
         '/home_instructor': (context) => HomeInstructor(),
+        '/home_parent': (context) => HomeParent(),
 
       },
       debugShowCheckedModeBanner: false,

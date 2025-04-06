@@ -52,9 +52,9 @@ class _SigninState extends State<Signin> {
         case 'instructor':
           Navigator.pushReplacementNamed(context, '/home_instructor');
           break;
-        // case 'parent':
-        //   Navigator.pushReplacementNamed(context, '/profile2');
-        //   break;
+        case 'parent':
+          Navigator.pushReplacementNamed(context, '/home_parent');
+          break;
         default:
           setState(() {
             errorMessage = 'Unknown role: $role';

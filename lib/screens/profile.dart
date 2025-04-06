@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:edu_sync/controllers/navigation2.dart';
+import 'package:edu_sync/controllers/navigation3.dart';
 import 'package:edu_sync/widgets/bottom_bar_2.dart';
 import 'package:edu_sync/widgets/gender_dropdown.dart';
 import 'package:edu_sync/widgets/profile-field.dart';
@@ -9,7 +10,8 @@ import 'package:edu_sync/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
 
 class Profile2 extends StatefulWidget {
-  const Profile2({super.key});
+  final String userRole;
+  const Profile2({super.key, required this.userRole});
 
   @override
   _ProfileState createState() => _ProfileState();
@@ -25,6 +27,7 @@ class _ProfileState extends State<Profile2> {
   String _phone = '';
   String _gender = 'Female';
   String _subject = '';
+  late String _role ;
 
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _phoneController = TextEditingController();
@@ -33,6 +36,7 @@ class _ProfileState extends State<Profile2> {
   @override
   void initState() {
     super.initState();
+    _role = widget.userRole;
     _fetchUserData();
   }
 
@@ -81,13 +85,23 @@ class _ProfileState extends State<Profile2> {
       );
     }
   }
+  void _handleBottomBarTap(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+    
+    if (_role == 'parent') {
+      Navigation3.onItemTapped(context, index);
+    } else {
+      Navigation2.onItemTapped(context, index);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 242, 243, 243),
-      body: 
-      SafeArea(
+      body: SafeArea(
         child: Column(
           children: [
             Expanded(
@@ -199,12 +213,7 @@ class _ProfileState extends State<Profile2> {
             ),
             BottomBar2(
               currentIndex: _selectedIndex,
-              onTap: (index) {
-                setState(() {
-                  _selectedIndex = index;
-                });
-                Navigation2.onItemTapped(context, index);
-              },
+              onTap: _handleBottomBarTap,
             ),
           ],
         ),
@@ -212,6 +221,3 @@ class _ProfileState extends State<Profile2> {
     );
   }
 }
-
-
-
