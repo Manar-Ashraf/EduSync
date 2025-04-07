@@ -1,3 +1,5 @@
+import 'package:edu_sync/controllers/navigation2.dart';
+import 'package:edu_sync/widgets/bottom_bar_2.dart';
 import 'package:flutter/material.dart';
 
 class AddGrades extends StatefulWidget {
@@ -9,6 +11,8 @@ class AddGrades extends StatefulWidget {
 }
 
 class _AddGradesState extends State<AddGrades> {
+  int _currentIndex = 0;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,8 +34,16 @@ class _AddGradesState extends State<AddGrades> {
         ),
       ),
 
-
-
+      
+      bottomNavigationBar: BottomBar2(
+        currentIndex: _currentIndex,
+        onTap: (index) {
+          setState(() {
+            _currentIndex = index;
+          });
+          Navigation2.onItemTapped(context, index);
+        },
+      ),
     );
   }
 }

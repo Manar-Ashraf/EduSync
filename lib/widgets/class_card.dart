@@ -6,7 +6,7 @@ class ClassCard extends StatelessWidget {
   final String className;
   final VoidCallback? onTap;
 
-  ClassCard({
+  const ClassCard({super.key, 
     required this.subject,
     required this.students,
     required this.className, 

@@ -62,7 +62,6 @@ class _StudentReportState extends State<StudentReport> {
       }
 
       final studentId = studentQuery.docs.first.id;
-      final studentData = studentQuery.docs.first.data();
 
       final enrollmentsQuery =
           await FirebaseFirestore.instance
