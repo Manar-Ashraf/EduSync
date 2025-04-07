@@ -3,7 +3,7 @@ import 'package:edu_sync/screens/parent/home_parent.dart';
 import 'package:edu_sync/screens/student/courses.dart';
 import 'package:edu_sync/screens/student/home_student.dart';
 import 'package:edu_sync/screens/student/profile_student.dart';
-import 'package:edu_sync/screens/student/report_student.dart';
+import 'package:edu_sync/screens/student/report.dart';
 import 'package:edu_sync/screens/signin.dart';
 import 'package:edu_sync/screens/signup.dart';
 import 'package:flutter/material.dart';

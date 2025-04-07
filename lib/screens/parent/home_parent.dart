@@ -61,6 +61,22 @@ class _HomeParentState extends State<HomeParent> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color.fromRGBO(242, 243, 243, 1),
+      // appBar: AppBar(
+      //   backgroundColor: const Color.fromARGB(255, 5, 126, 128),
+      //   toolbarHeight: 70,
+      //   title: const Text(
+      //     "First Term Exam",
+      //     style: TextStyle(
+      //       fontSize: 20,
+      //       fontWeight: FontWeight.w900,
+      //       fontStyle: FontStyle.italic,
+      //     ),
+      //   ),
+      //   centerTitle: true,
+      //   shape: const RoundedRectangleBorder(
+      //     borderRadius: BorderRadius.vertical(bottom: Radius.circular(25)),
+      //   ),
+      // ),
       body: Column(
         children: [
           Container(
@@ -242,10 +258,10 @@ class _HomeParentState extends State<HomeParent> {
                         MaterialPageRoute(
                           builder:
                               (context) => StudentReport(
-                                // studentName: _nameController.text,
-                                // studentEmail: _emailController.text,
-                                // studentLevel: _selectedLevel!,
-                                // examType: _selectedExam!,
+                                studentName: _nameController.text,
+                                studentEmail: _emailController.text,
+                                studentLevel: _selectedLevel!,
+                                examType: _selectedExam!,
                               ),
                         ),
                       );
