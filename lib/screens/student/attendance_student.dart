@@ -97,40 +97,23 @@ class _AttendanceStudentState extends State<AttendanceStudent> {
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 242, 243, 243),
       appBar: AppBar(
-        toolbarHeight: 30.0,
         backgroundColor: const Color.fromARGB(255, 5, 126, 128),
+        toolbarHeight: 75,
+        title: Text(
+          "Attendance",
+          style: const TextStyle(
+            fontSize: 20,
+            fontWeight: FontWeight.w900,
+            fontStyle: FontStyle.italic,
+          ),
+        ),
+        centerTitle: true,
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(bottom: Radius.circular(25)),
+        ),
       ),
       body: Column(
         children: [
-          Container(
-            height: 60,
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
-            decoration: const BoxDecoration(
-              color: Color.fromARGB(255, 5, 126, 128),
-              borderRadius: BorderRadius.only(
-                bottomLeft: Radius.circular(25),
-                bottomRight: Radius.circular(25),
-              ),
-            ),
-            child: SafeArea(
-              child: Row(
-                children: [
-                  Expanded(
-                    child: Text(
-                      "Attendance",
-                      style: const TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.w900,
-                        color: Colors.black,
-                      ),
-                      textAlign: TextAlign.center,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-
           Container(
             padding: const EdgeInsets.all(5.0),
             child: TableCalendar(
@@ -169,7 +152,7 @@ class _AttendanceStudentState extends State<AttendanceStudent> {
             ),
           ),
 
-          const SizedBox(height: 5),
+          const SizedBox(height: 10),
 
           Expanded(
             child: Padding(

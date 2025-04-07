@@ -14,7 +14,20 @@ class _ClassDetailsState extends State<ClassDetails> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Class Details'),
+        backgroundColor: const Color.fromARGB(255, 5, 126, 128),
+        toolbarHeight: 75,
+        title: Text(
+          widget.subjectName,
+          style: const TextStyle(
+            fontSize: 20,
+            fontWeight: FontWeight.w900,
+            fontStyle: FontStyle.italic,
+          ),
+        ),
+        centerTitle: true,
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(bottom: Radius.circular(25)),
+        ),
       ),
       body: Center(
         child: Column(

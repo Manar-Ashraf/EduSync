@@ -75,7 +75,6 @@ class _HomeInstructorState extends State<HomeInstructor> {
           final classDoc = classDocs.docs[j];
           final className = classDoc['className'] as String? ?? 'N/A';
 
-          // Use modulo to cycle through hardcoded student counts
           final studentCount = _studentCounts[(i + j) % _studentCounts.length];
 
           _classes.add({

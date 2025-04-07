@@ -227,7 +227,7 @@ class _StudentReportState extends State<StudentReport> {
                   child: Text("You don't have permission to view this report"),
                 )
               else if (isLoading)
-                const Center(child: CircularProgressIndicator())
+                const Center(child: CircularProgressIndicator(color: Color.fromARGB(255, 5, 126, 128),))
               else if (subjectScores.isEmpty)
                 const Center(child: Text("No report data available"))
               else
