@@ -79,7 +79,7 @@ Future<void> fetchStudents() async {
           "${widget.subjectName} CLASS",
           style: const TextStyle(
             fontSize: 20,
-            fontWeight: FontWeight.w900,
+            fontWeight: FontWeight.w700,
             fontStyle: FontStyle.italic,
           ),
         ),
@@ -194,7 +194,7 @@ Future<void> fetchStudents() async {
                               title: Text(
                                 students[index],
                                 style: const TextStyle(
-                                  fontWeight: FontWeight.bold,
+                                  fontWeight: FontWeight.w500,
                                   fontSize: 18,
                                 ),
                               ),
@@ -240,7 +240,7 @@ Widget _buildFeatureButton(IconData icon, String label) {
       Text(
         label,
         textAlign: TextAlign.center,
-        style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
+        style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
       ),
     ],
   );
