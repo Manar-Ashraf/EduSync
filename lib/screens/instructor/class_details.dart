@@ -155,7 +155,7 @@ Future<void> fetchStudents() async {
             Expanded(
               child:
                   isLoading
-                      ? const Center(child: CircularProgressIndicator(color: const Color.fromARGB(255, 5, 126, 128),))
+                      ? const Center(child: CircularProgressIndicator(color: Color.fromARGB(255, 5, 126, 128),))
                       : students.isEmpty
                       ? const Center(
                         child: Text('No students found for this subject.'),

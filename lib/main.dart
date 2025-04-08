@@ -1,5 +1,6 @@
 import 'package:edu_sync/screens/instructor/home_instructor.dart';
 import 'package:edu_sync/screens/parent/home_parent.dart';
+import 'package:edu_sync/screens/splash.dart';
 import 'package:edu_sync/screens/student/courses.dart';
 import 'package:edu_sync/screens/student/home_student.dart';
 import 'package:edu_sync/screens/student/profile_student.dart';
@@ -23,6 +24,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       routes: {
+        '/splash':(context) => SplashScreen(),
         '/signin': (context) => Signin(),
         '/signup': (context) => SignUp(),
         '/profile': (context) => Profile(),
@@ -32,10 +34,9 @@ class MyApp extends StatelessWidget {
         '/report_student': (context) => ReportStudent(),
         '/home_instructor': (context) => HomeInstructor(),
         '/home_parent': (context) => HomeParent(),
-
       },
       debugShowCheckedModeBanner: false,
-      initialRoute: '/signin',
+      initialRoute: '/splash',
     );
   }
 }

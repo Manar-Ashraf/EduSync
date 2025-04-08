@@ -296,7 +296,7 @@ class _AddGradesState extends State<AddGrades> {
                       const Divider(color: Color.fromARGB(255, 185, 184, 184)),
                   ],
                 );
-              }).toList(),
+              }),
               const SizedBox(height: 20),
               SizedBox(
                 width: double.infinity,
