@@ -111,7 +111,10 @@ class _AddGradesState extends State<AddGrades> {
     }
 
     ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text('Grades submitted successfully')),
+      const SnackBar(
+        content: Text('Grades submitted successfully'),
+        backgroundColor: Colors.green,
+      ),
     );
   }
 
@@ -124,10 +127,7 @@ class _AddGradesState extends State<AddGrades> {
         toolbarHeight: 75,
         title: Text(
           "${widget.subjectName} CLASS",
-          style: const TextStyle(
-            fontSize: 20,
-            fontWeight: FontWeight.w600,
-          ),
+          style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
         ),
         centerTitle: true,
         shape: const RoundedRectangleBorder(
@@ -180,7 +180,11 @@ class _AddGradesState extends State<AddGrades> {
                             ),
                           )
                           .toList(),
-                  onChanged: (value) {},
+                  onChanged: (value) {
+                    setState(() {
+                      selectedType = value!;
+                    });
+                  },
                   decoration: InputDecoration(
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10),

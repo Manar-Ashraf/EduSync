@@ -3,6 +3,7 @@ import 'package:edu_sync/controllers/navigation2.dart';
 import 'package:edu_sync/widgets/bottom_bar_2.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class MarkAttendance extends StatefulWidget {
   final String subjectName;
@@ -16,31 +17,6 @@ class _MarkAttendanceState extends State<MarkAttendance> {
   int _currentIndex = 0;
   DateTime _selectedDate = DateTime.now();
   List<Map<String, dynamic>> students = [];
-
-  // final List<Map<String, dynamic>> students = [
-  //   {'name': 'Mazen Ashraf', 'present': true},
-  //   {'name': 'Nadeen Hossam', 'present': true},
-  //   {'name': 'Nourhan Mohammed', 'present': true},
-  //   {'name': 'Marwan Rashad', 'present': false},
-  //   {'name': 'Salma Hassan', 'present': false},
-  //   {'name': 'Nancy Khaled', 'present': true},
-  //   {'name': 'Adam Maged', 'present': true},
-  //   {'name': 'Farida Emad', 'present': false},
-  //   {'name': 'Hagar Mohsen', 'present': true},
-  //   {'name': 'Eyad Hossam', 'present': true},
-  // ];
-  // final List<String> students = [
-  //   'Mazen Ashraf',
-  //   'Zeina Mohammed',
-  //   'Nourhan Mohammed',
-  //   'Marwan Rashad',
-  //   'Salma Hassan',
-  //   'Nancy Khaled',
-  //   'Adam Maged',
-  //   'Farida Emad',
-  //   'Hagar Mohsen',
-  //   'Eyad Hossam'
-  // ];
 
   @override
   void initState() {
@@ -300,6 +276,7 @@ class _MarkAttendanceState extends State<MarkAttendance> {
                 child: ElevatedButton(
                   onPressed: () async {
                     try {
+                      final currentUserId = FirebaseAuth.instance.currentUser?.uid;
                       String formattedDate = DateFormat(
                         'yyyy-MM-dd',
                       ).format(_selectedDate);
@@ -311,19 +288,19 @@ class _MarkAttendanceState extends State<MarkAttendance> {
                             .collection('attendance')
                             .doc(
                               formattedDate,
-                            ); // This avoids time-specific duplication
+                            ); 
 
                         await docRef.set({
                           'date': Timestamp.fromDate(_selectedDate),
                           'present': student['present'],
-                          'markedBy':
-                              'teacherUserId123', // You can replace this dynamically
+                          'markedBy': currentUserId, 
                         });
                       }
 
                       ScaffoldMessenger.of(context).showSnackBar(
                         const SnackBar(
                           content: Text('Attendance saved successfully'),
+                          backgroundColor: Colors.green,
                         ),
                       );
                     } catch (e) {
